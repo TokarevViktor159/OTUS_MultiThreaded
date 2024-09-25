@@ -64,11 +64,13 @@ namespace OTUS_MultiThreaded
                 {
                     int min = section * index;
                     int max = index + 1 == useThreadCount ? array.Length : section * (index + 1);
+                    int summa = 0;
 
                     for (int j = min; j < max; j++)
                     {
-                        Interlocked.Add(ref sum[index], array[j]);
+                        summa += array[j];
                     }
+                    sum[index] = summa;
                     doneEvents[index].Set();
                 });
             }
